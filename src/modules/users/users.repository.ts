@@ -6,21 +6,21 @@ export class UsersRepository {
   // This is a temporal mock database
   private users = [
     {
-      userId: 1,
+      id: 1,
       email: 'V6aFq@example.com',
       username: 'john',
       password: 'changeme',
       isAdmin: true,
     },
     {
-      userId: 2,
+      id: 2,
       email: 'cVY6o@example.com',
       username: 'maria',
       password: 'guess',
       isAdmin: false,
     },
     {
-      userId: 3,
+      id: 3,
       email: 'cVY6o@example.com',
       username: 'lucy',
       password: 'secret',
@@ -41,9 +41,10 @@ export class UsersRepository {
   }
 
   // POST /users/register
-  async registerUser(user: Omit<IUser, 'userId'>) {
+  async registerUser(user: Omit<IUser, 'id'>) {
     const id = this.users.length + 1;
-    this.users = [...this.users, { userId: id, ...user }];
-    return { userId: id, ...user };
+    const newUser = { id, ...user };
+    this.users.push(newUser);
+    return newUser;
   }
 }

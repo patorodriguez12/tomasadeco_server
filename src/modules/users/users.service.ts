@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UsersRepository } from './users.repository';
-import { IUser } from './interfaces/user.interface';
+import { UserDto } from './dto/user.dto';
 
 @Injectable()
 export class UsersService {
@@ -19,7 +19,16 @@ export class UsersService {
   }
 
   // POST /users/register
-  registerUser(user: Omit<IUser, 'userId'>): Promise<IUser> {
-    return this.usersRepository.registerUser(user);
+  async registerUser(userDto: UserDto) {
+    const { email, password, username, isAdmin } = userDto;
+
+    const newUser = await this.usersRepository.registerUser({
+      email,
+      password,
+      username,
+      isAdmin: isAdmin ?? false,
+    });
+
+    return newUser;
   }
 }
