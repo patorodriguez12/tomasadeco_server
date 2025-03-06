@@ -148,7 +148,13 @@ export class ProductsRepository {
     },
   ];
 
+  // GET /products
   async getProducts() {
     return this.products;
+  }
+
+  // GET /products?name=...
+  async getProductByName(name: string) {
+    return this.products.filter((product) => product.name.includes(name));
   }
 }
