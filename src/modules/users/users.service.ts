@@ -36,4 +36,9 @@ export class UsersService {
 
     return newUser;
   }
+
+  // PUT /users/:id
+  updateUser(id: number, userDto: UserDto) {
+    return this.usersRepository.updateUser(id, userDto);
+  }
 }

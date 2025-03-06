@@ -56,4 +56,15 @@ export class UsersRepository {
     this.users.push(newUser);
     return newUser;
   }
+
+  // PUT /users/:id
+  async updateUser(id: number, user: Omit<IUser, 'id'>) {
+    const index = this.users.findIndex((user) => user.id === id);
+    if (index === -1) {
+      return `User with id ${id} not found`;
+    }
+
+    this.users[index] = { ...this.users[index], ...user };
+    return this.users[index];
+  }
 }
