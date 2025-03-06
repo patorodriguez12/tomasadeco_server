@@ -42,6 +42,10 @@ export class UsersRepository {
 
   // GET /users/:id
   async getUserById(id: number) {
+    if (!this.users.find((user) => user.id === id)) {
+      return `User with id ${id} not found`;
+    }
+
     return this.users.find((user) => user.id === id);
   }
 
