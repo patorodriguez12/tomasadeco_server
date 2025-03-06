@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ProductsRepository } from './products.repository';
+import { ProductDto } from './dto/product.dto';
 
 @Injectable()
 export class ProductsService {
@@ -18,5 +19,10 @@ export class ProductsService {
   // GET /products/:id
   getProductById(id: number) {
     return this.productsRepository.getProductById(id);
+  }
+
+  // PUT /products/:id
+  updateProduct(id: number, productDto: ProductDto) {
+    return this.productsRepository.updateProduct(id, productDto);
   }
 }

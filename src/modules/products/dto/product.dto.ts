@@ -1,8 +1,11 @@
-import { IsString } from 'class-validator';
+import { IsBoolean, IsNumber, IsString } from 'class-validator';
 
 export class ProductDto {
   @IsString()
   name: string;
+
+  @IsNumber()
+  price: number;
 
   @IsString()
   description: string;
@@ -13,14 +16,11 @@ export class ProductDto {
   @IsString()
   category: string;
 
-  @IsString()
-  price: string;
+  @IsNumber()
+  stock: number;
 
-  @IsString()
-  stock: string;
-
-  @IsString()
-  featured: string;
+  @IsBoolean()
+  featured: boolean;
 
   @IsString()
   createdAt: string;

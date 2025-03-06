@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { IProduct } from './interfaces/product.interface';
 
 @Injectable()
 export class ProductsRepository {
-  private readonly products = [
+  private products = [
     {
       id: 1,
       name: 'Product 1',
@@ -165,5 +166,16 @@ export class ProductsRepository {
     }
 
     return this.products.find((product) => product.id === id);
+  }
+
+  // PUT /products/:id
+  async updateProduct(id: number, product: Omit<IProduct, 'id'>) {
+    const index = this.products.findIndex((product) => product.id === id);
+    if (index === -1) {
+      return `Product with id ${id} not found`;
+    }
+
+    this.products[index] = { ...this.products[index], ...product };
+    return this.products[index];
   }
 }
