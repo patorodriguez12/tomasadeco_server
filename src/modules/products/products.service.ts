@@ -25,4 +25,9 @@ export class ProductsService {
   updateProduct(id: number, productDto: ProductDto) {
     return this.productsRepository.updateProduct(id, productDto);
   }
+
+  // DELETE /products/:id
+  deleteProduct(id: number) {
+    return this.productsRepository.deleteProduct(id);
+  }
 }

@@ -178,4 +178,14 @@ export class ProductsRepository {
     this.products[index] = { ...this.products[index], ...product };
     return this.products[index];
   }
+
+  // DELETE /products/:id
+  async deleteProduct(id: number) {
+    if (!this.products.find((product) => product.id === id)) {
+      return `Product with id ${id} not found`;
+    }
+
+    this.products = this.products.filter((product) => product.id !== id);
+    return `Product with id ${id} deleted`;
+  }
 }
