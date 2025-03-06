@@ -67,4 +67,14 @@ export class UsersRepository {
     this.users[index] = { ...this.users[index], ...user };
     return this.users[index];
   }
+
+  // DELETE /users/:id
+  async deleteUser(id: number) {
+    if (!this.users.find((user) => user.id === id)) {
+      return `User with id ${id} not found`;
+    }
+
+    this.users = this.users.filter((user) => user.id !== id);
+    return `User with id ${id} deleted`;
+  }
 }
