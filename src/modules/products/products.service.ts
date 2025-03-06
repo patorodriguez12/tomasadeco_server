@@ -14,4 +14,9 @@ export class ProductsService {
   getProductByName(name: string) {
     return this.productsRepository.getProductByName(name);
   }
+
+  // GET /products/:id
+  getProductById(id: number) {
+    return this.productsRepository.getProductById(id);
+  }
 }

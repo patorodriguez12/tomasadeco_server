@@ -155,6 +155,15 @@ export class ProductsRepository {
 
   // GET /products?name=...
   async getProductByName(name: string) {
-    return this.products.filter((product) => product.name.includes(name));
+    return this.products.filter((product) => product.name === name);
+  }
+
+  // GET /products/:id
+  async getProductById(id: number) {
+    if (!this.products.find((product) => product.id === id)) {
+      return `Product with id ${id} not found`;
+    }
+
+    return this.products.find((product) => product.id === id);
   }
 }
