@@ -40,6 +40,11 @@ export class UsersRepository {
     return this.users.filter((user) => user.username === name);
   }
 
+  // GET /users/:id
+  async getUserById(id: number) {
+    return this.users.find((user) => user.id === id);
+  }
+
   // POST /users/register
   async registerUser(user: Omit<IUser, 'id'>) {
     const id = this.users.length + 1;
