@@ -59,7 +59,7 @@ export class UsersRepository {
   // These methods are used in the users service
 
   // GET /users
-  async getUsers(page: number, limit: number) {
+  getUsers(page: number, limit: number) {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
@@ -74,14 +74,14 @@ export class UsersRepository {
   }
 
   // GET /users?name=...
-  async getUsersByName(name: string) {
+  getUsersByName(name: string) {
     return this.users
       .filter((user) => user.username === name)
       .map(({ password, ...user }) => user);
   }
 
   // GET /users/:id
-  async getUserById(id: number) {
+  getUserById(id: number) {
     if (!this.users.find((user) => user.id === id)) {
       return `User with id ${id} not found`;
     }
@@ -92,7 +92,7 @@ export class UsersRepository {
   }
 
   // POST /users/register
-  async registerUser(user: Omit<IUser, 'id'>) {
+  registerUser(user: Omit<IUser, 'id'>) {
     const id = this.users.length + 1;
     const newUser = { id, ...user };
     this.users.push(newUser);
@@ -100,7 +100,7 @@ export class UsersRepository {
   }
 
   // PUT /users/:id
-  async updateUser(id: number, user: Omit<IUser, 'id'>) {
+  updateUser(id: number, user: Omit<IUser, 'id'>) {
     const index = this.users.findIndex((user) => user.id === id);
     if (index === -1) {
       return `User with id ${id} not found`;
@@ -111,7 +111,7 @@ export class UsersRepository {
   }
 
   // DELETE /users/:id
-  async deleteUser(id: number) {
+  deleteUser(id: number) {
     if (!this.users.find((user) => user.id === id)) {
       return `User with id ${id} not found`;
     }

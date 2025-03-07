@@ -150,7 +150,7 @@ export class ProductsRepository {
   ];
 
   // GET /products
-  async getProducts(page: number, limit: number) {
+  getProducts(page: number, limit: number) {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
@@ -165,12 +165,12 @@ export class ProductsRepository {
   }
 
   // GET /products?name=...
-  async getProductByName(name: string) {
+  getProductByName(name: string) {
     return this.products.filter((product) => product.name === name);
   }
 
   // GET /products/:id
-  async getProductById(id: number) {
+  getProductById(id: number) {
     if (!this.products.find((product) => product.id === id)) {
       return `Product with id ${id} not found`;
     }
@@ -179,7 +179,7 @@ export class ProductsRepository {
   }
 
   // PUT /products/:id
-  async updateProduct(id: number, product: Omit<IProduct, 'id'>) {
+  updateProduct(id: number, product: Omit<IProduct, 'id'>) {
     const index = this.products.findIndex((product) => product.id === id);
     if (index === -1) {
       return `Product with id ${id} not found`;
@@ -190,7 +190,7 @@ export class ProductsRepository {
   }
 
   // DELETE /products/:id
-  async deleteProduct(id: number) {
+  deleteProduct(id: number) {
     if (!this.products.find((product) => product.id === id)) {
       return `Product with id ${id} not found`;
     }
