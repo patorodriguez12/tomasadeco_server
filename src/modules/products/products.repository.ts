@@ -150,8 +150,18 @@ export class ProductsRepository {
   ];
 
   // GET /products
-  async getProducts() {
-    return this.products;
+  async getProducts(page: number, limit: number) {
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
+    const paginatedProducts = this.products.slice(startIndex, endIndex);
+    return {
+      totalProducts: this.products.length,
+      page,
+      limit,
+      totalPages: Math.ceil(this.products.length / limit),
+      products: paginatedProducts,
+    };
   }
 
   // GET /products?name=...

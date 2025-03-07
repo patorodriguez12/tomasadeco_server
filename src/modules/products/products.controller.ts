@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { ProductDto } from './dto/product.dto';
 
@@ -8,12 +16,16 @@ export class ProductsController {
 
   // GET /products
   @Get()
-  getProducts(@Query('name') name?: string) {
+  getProducts(
+    @Query('name') name?: string,
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+  ) {
     if (name) {
       return this.productsService.getProductByName(name);
     }
 
-    return this.productsService.getProducts();
+    return this.productsService.getProducts(page, limit);
   }
 
   // GET /products/:id
