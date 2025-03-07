@@ -33,8 +33,8 @@ export class UsersController {
 
   // POST /users/register
   @Post('register')
-  registerUser(@Body() UserDto: UserDto) {
-    return this.usersService.registerUser(UserDto);
+  registerUser(@Body() userDto: UserDto) {
+    return this.usersService.registerUser(userDto);
   }
 
   // PUT /users/:id
