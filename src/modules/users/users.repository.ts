@@ -32,12 +32,14 @@ export class UsersRepository {
 
   // GET /users
   async getUsers() {
-    return this.users;
+    return this.users.map(({ password, ...user }) => user);
   }
 
   // GET /users?name=...
   async getUsersByName(name: string) {
-    return this.users.filter((user) => user.username === name);
+    return this.users
+      .filter((user) => user.username === name)
+      .map(({ password, ...user }) => user);
   }
 
   // GET /users/:id
@@ -46,7 +48,9 @@ export class UsersRepository {
       return `User with id ${id} not found`;
     }
 
-    return this.users.find((user) => user.id === id);
+    return this.users
+      .filter((user) => user.id === id)
+      .map(({ password, ...user }) => user);
   }
 
   // POST /users/register
