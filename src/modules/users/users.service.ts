@@ -9,8 +9,8 @@ export class UsersService {
   // These methods are used in the users controller and are called by the users repository
 
   // GET /users
-  getUsers() {
-    return this.usersRepository.getUsers();
+  getUsers(page = 1, limit = 5) {
+    return this.usersRepository.getUsers(page, limit);
   }
 
   // GET /users?name=...

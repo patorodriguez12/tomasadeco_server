@@ -7,23 +7,51 @@ export class UsersRepository {
   private users = [
     {
       id: 1,
-      email: 'V6aFq@example.com',
+      email: 'john@example.com',
       username: 'john',
-      password: 'changeme',
-      isAdmin: true,
+      password: 'pass123',
+      isAdmin: false,
     },
     {
       id: 2,
-      email: 'cVY6o@example.com',
+      email: 'maria@example.com',
       username: 'maria',
-      password: 'guess',
+      password: 'pass123',
       isAdmin: false,
     },
     {
       id: 3,
-      email: 'cVY6o@example.com',
+      email: 'lucy@example.com',
       username: 'lucy',
-      password: 'secret',
+      password: 'pass123',
+      isAdmin: false,
+    },
+    {
+      id: 4,
+      email: 'paul@example.com',
+      username: 'paul',
+      password: 'pass123',
+      isAdmin: false,
+    },
+    {
+      id: 5,
+      email: 'lisa@example.com',
+      username: 'lisa',
+      password: 'pass123',
+      isAdmin: false,
+    },
+    {
+      id: 6,
+      email: 'mark@example.com',
+      username: 'mark',
+      password: 'pass123',
+      isAdmin: false,
+    },
+    {
+      id: 7,
+      email: 'susan@example.com',
+      username: 'susan',
+      password: 'pass123',
       isAdmin: false,
     },
   ];
@@ -31,8 +59,18 @@ export class UsersRepository {
   // These methods are used in the users service
 
   // GET /users
-  async getUsers() {
-    return this.users.map(({ password, ...user }) => user);
+  async getUsers(page: number, limit: number) {
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
+    const paginatedUsers = this.users.slice(startIndex, endIndex);
+    return {
+      totalUsers: this.users.length,
+      page,
+      limit,
+      totalPages: Math.ceil(this.users.length / limit),
+      users: paginatedUsers.map(({ password, ...user }) => user),
+    };
   }
 
   // GET /users?name=...

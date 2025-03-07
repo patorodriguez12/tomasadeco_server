@@ -17,12 +17,16 @@ export class UsersController {
 
   // GET /users
   @Get()
-  getUsers(@Query('name') name?: string) {
+  getUsers(
+    @Query('name') name?: string,
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+  ) {
     if (name) {
       return this.usersService.getUsersByName(name);
     }
 
-    return this.usersService.getUsers();
+    return this.usersService.getUsers(page, limit);
   }
 
   // GET /users/:id
