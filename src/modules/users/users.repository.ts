@@ -91,6 +91,11 @@ export class UsersRepository {
       .map(({ password, ...user }) => user);
   }
 
+  // GET /users/?email=...
+  getUserByEmail(email: string) {
+    return this.users.find((user) => user.email === email);
+  }
+
   // POST /users/register
   registerUser(user: Omit<IUser, 'id'>) {
     const id = this.users.length + 1;

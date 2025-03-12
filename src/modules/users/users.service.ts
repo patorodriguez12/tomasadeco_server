@@ -18,16 +18,21 @@ export class UsersService {
     return this.usersRepository.getUsersByName(name);
   }
 
+  // GET /users?email=...
+  getUserByEmail(email: string) {
+    return this.usersRepository.getUserByEmail(email);
+  }
+
   // GET /users/:id
   getUserById(id: number) {
     return this.usersRepository.getUserById(id);
   }
 
   // POST /users/register
-  async registerUser(userDto: UserDto) {
+  registerUser(userDto: UserDto) {
     const { email, password, username, isAdmin } = userDto;
 
-    const newUser = await this.usersRepository.registerUser({
+    const newUser = this.usersRepository.registerUser({
       email,
       password,
       username,

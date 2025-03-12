@@ -19,11 +19,16 @@ export class UsersController {
   @Get()
   getUsers(
     @Query('name') name?: string,
+    @Query('email') email?: string,
     @Query('page') page?: number,
     @Query('limit') limit?: number,
   ) {
     if (name) {
       return this.usersService.getUsersByName(name);
+    }
+
+    if (email) {
+      return this.usersService.getUserByEmail(email);
     }
 
     return this.usersService.getUsers(page, limit);
