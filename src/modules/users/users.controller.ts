@@ -7,9 +7,11 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UserDto } from './dto/user.dto';
+import { AuthGuard } from 'src/common/guards/auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -17,6 +19,7 @@ export class UsersController {
 
   // GET /users
   @Get()
+  @UseGuards(AuthGuard)
   getUsers(
     @Query('name') name?: string,
     @Query('email') email?: string,
